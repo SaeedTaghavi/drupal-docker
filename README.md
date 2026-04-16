@@ -68,3 +68,13 @@ docker compose --env-file .env.local down -v
 Never commit `.env.local` or any file containing real passwords to version control.
 
 Ensure `web/sites/default/settings.php` permissions are set to read-only (644) after the installation is complete.
+
+
+
+
+## todo
+1. [ ] Swap Apache for NGINX & FPM
+    
+2. [ ] Implement a Secret Manager
+3. [ ] Database Backups
+4. [ ] Add Drush (Drupal Shell)
