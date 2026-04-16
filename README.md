@@ -80,6 +80,12 @@ Ensure `web/sites/default/settings.php` permissions are set to read-only (644) a
   - [ ] Write a custom `nginx.conf`
 - [ ] Set up Docker Secrets for DB passwords
 - [ ] Create a database backup script
+- [ ] Create a dedicated database backup service
+    - [ ] Write `scripts/backup.sh` with rotation logic (delete >7 days)
+    - [ ] Create `scripts/crontab` for automated scheduling
+    - [ ] Build `Dockerfile.backup` with `cron` and `mariadb-client`
+    - [ ] Add `backup-worker` sidecar service to `docker-compose.yml`
+    - [ ] Test manual execution via `docker compose exec`
 - [ ] Custom Development
   - [ ] Create a "Hello World" custom module
   - [ ] Build a custom sub-theme
