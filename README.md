@@ -72,9 +72,14 @@ Ensure `web/sites/default/settings.php` permissions are set to read-only (644) a
 
 
 
-## todo
-1. [ ] Swap Apache for NGINX & FPM
-    
-2. [ ] Implement a Secret Manager
-3. [ ] Database Backups
-4. [ ] Add Drush (Drupal Shell)
+## Learning To-Do List
+- [x] Initial Docker Setup (Apache)
+- [ ] Migrate to NGINX + PHP-FPM
+  - [ ] Update `docker-compose.yml` with `drupal:10-fpm`
+  - [ ] Add `nginx` service
+  - [ ] Write a custom `nginx.conf`
+- [ ] Set up Docker Secrets for DB passwords
+- [ ] Create a database backup script
+- [ ] Custom Development
+  - [ ] Create a "Hello World" custom module
+  - [ ] Build a custom sub-theme
