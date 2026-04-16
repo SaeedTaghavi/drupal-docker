@@ -1,0 +1,37 @@
+services:
+  database:
+    image: mariadb:10.11
+    container_name: ${COMPOSE_PROJECT_NAME}_db
+    restart: always
+    environment:
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+    volumes:
+      - db_data:/var/lib/mysql
+
+  drupal:
+    image: drupal:10-apache
+    container_name: ${COMPOSE_PROJECT_NAME}_app
+    restart: always
+    ports:
+      - "${DRUPAL_PORT}:80"
+    environment:
+      - DRUPAL_DATABASE_NAME=${DB_NAME}
+      - DRUPAL_DATABASE_USERNAME=${DB_USER}
+      - DRUPAL_DATABASE_PASSWORD=${DB_PASSWORD}
+      - DRUPAL_DATABASE_HOST=database
+    volumes:
+      # Keep these as bind mounts so you can code your custom themes/modules
+      - ./web/modules:/var/www/html/modules
+      - ./web/profiles:/var/www/html/profiles
+      - ./web/themes:/var/www/html/themes
+      # USE A NAMED VOLUME FOR SITES (This solves the permission/missing file error)
+      - drupal_sites:/var/www/html/sites
+    depends_on:
+      - database
+
+volumes:
+  db_data:
+  drupal_sites: # Define the new volume here
